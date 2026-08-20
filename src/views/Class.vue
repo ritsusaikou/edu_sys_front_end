@@ -1,5 +1,5 @@
 <template>
-  Class
+  管理员班级界面
   <div>
     <el-button type="primary" @click="addClass">添加班级</el-button>
   </div>
@@ -9,11 +9,12 @@
         <el-empty description="暂无班级数据" />
       </template>
       <template v-else>
-        <el-table-column prop="id" label="班级id"></el-table-column>
+        <!-- <el-table-column prop="id" label="班级id"></el-table-column> -->
+        <el-table-column type="index" label="序号" width="150"></el-table-column>
         <el-table-column prop="college" label="学院"></el-table-column>
         <el-table-column prop="major" label="专业"></el-table-column>
         <el-table-column prop="classNo" label="班级号"></el-table-column>
-        <el-table-column prop="userId" label="班主任id"></el-table-column>
+        <!-- <el-table-column prop="userId" label="班主任id"></el-table-column> -->
         <el-table-column label="班主任">
           <template #default="scope">
             {{ scope.row.userName ? `${scope.row.userName}(${scope.row.userNo})` : "" }}

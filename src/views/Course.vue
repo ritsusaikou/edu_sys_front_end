@@ -1,5 +1,5 @@
 <template>
-  Course
+  管理员课程界面
   <div>
     <el-button type="primary" @click="addCourse">添加课程</el-button>
   </div>
@@ -9,10 +9,11 @@
     <template #empty>
       <div>暂无课程数据</div>
     </template>
-      <el-table-column prop="id" label="课程id"></el-table-column>
+      <el-table-column type="index" label="序号" width="150"></el-table-column>
+      <!-- <el-table-column prop="id" label="课程id"></el-table-column> -->
       <el-table-column prop="courseNo" label="课程号"></el-table-column>
       <el-table-column prop="courseName" label="课程名"></el-table-column>
-      <el-table-column prop="userId" label="授课教师id"></el-table-column>
+      <!-- <el-table-column prop="userId" label="授课教师id"></el-table-column> -->
       <el-table-column label="授课教师">
         <template #default="scope">
           {{ scope.row.userName ? `${scope.row.userName}(${scope.row.userNo})` : "" }}

@@ -11,11 +11,24 @@ const Register = () => import('../views/Register.vue')
 const UserCenter = () => import('../views/UserCenter.vue')
 const CourseChoice = () => import('../views/CourseChoice.vue')
 const ScoreQuery = () => import('../views/ScoreQuery.vue')
+const EvaluateCourseScore = () => import('../views/EvaluateCourseScore.vue')
+const TestForWs = () => import('../views/TestForWs.vue')
+
 const routes = [
     {
         // 默认指向'/home'
         path: '/',
         redirect: '/home'
+    },
+    {
+        path: '/test-for-WebSocket',
+        name: 'TestForWs',
+        component: TestForWs
+    },
+    {
+        path: '/evaluate-course-score',
+        name: 'EvaluateCourseScore',
+        component: EvaluateCourseScore
     },
     {
         path: '/score-query',
@@ -92,38 +105,28 @@ const getTokenFromCookie = () => {
 // 全局路由守卫
 router.beforeEach(async (to, from, next) => {
     const userInfoStore = useUserInfoStore()
-    // 从cookie中拿到token
     const token = getTokenFromCookie()
-    if (token && !userInfoStore.userInfo.id) {
-        // console.log("userInfo没有值")
+
+    //登录页直接放行
+    if(to.path === '/login'){
+        next()
+        return
+    }
+
+    // 有token、但是用户信息为空、并且当前没有正在请求
+    if (token && !userInfoStore.id && !userInfoStore.isLoading) {
         try {
             await userInfoStore.getUserInfo()
-            // 重新触发一次守卫，带上replace避免历史冗余
-            next({ ...to, replace: true })
-            return
+            //拿到用户信息之后，直接放行目标地址
+            next()
         } catch (err) {
-            // token失效、接口报错，清空登录态跳登录
             userInfoStore.logout()
             next('/login')
-            return
         }
+        return
     }
 
-    // console.log(token)
-
-    // 所有人都能访问的名单
-    const allAccessList = ['/about', '/home']
-    // 不需要登录的白名单
-    const whiteList = ['/login', '/register']
-    if (allAccessList.includes(to.path)) { // 1.白名单内
-        next();
-    } else if (whiteList.includes(to.path)) {
-        token ? next('/home') : next()
-    }
-    else { //2.非白名单
-        token ? next() : next('/login')
-    }
-
+    next()
 })
 
 

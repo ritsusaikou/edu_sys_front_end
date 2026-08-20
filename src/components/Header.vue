@@ -1,7 +1,9 @@
 <template>
   <div style="display: flex; justify-content: right">
     <el-dropdown>
-      <span class="el-dropdown-link">姓名：{{ props.userInfo.name }}</span>
+    <div style="width:32px;height:32px;border-radius:50%;background-color:#409EFF;display:flex;align-items:center;justify-content:center;color:#ffffff;font-size:16px">
+      {{ userInfoStore.name?.charAt(0) || "?" }}
+    </div>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item @click="toUserCenter">用户中心</el-dropdown-item>
@@ -25,8 +27,6 @@ const route = useRoute();
 const router = useRouter();
 const userName = ref("");
 const userInfoStore = useUserInfoStore();
-
-const props = defineProps(["userInfo"]);
 
 const getUserInfo = async () => {
   // console.log("lgjsd");
