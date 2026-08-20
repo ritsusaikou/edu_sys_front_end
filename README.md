@@ -8,3 +8,6 @@ Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://
 # study
 simple study
 >>>>>>> bb6cb8c07bdf5f9c662b7e998091a56349bedd51
+
+
+>>>这是测试vscode的git
