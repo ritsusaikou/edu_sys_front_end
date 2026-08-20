@@ -29,7 +29,7 @@ export const useUserInfoStore = defineStore('userInfo', {
         async getUserInfo() {
             this.isLoading = true
             try {
-                const res = await request.get("/user/getInfo")
+                const res = await request.get("/user/info")
                 if (res.code === 200) {
                     //后端返回用户对象直接赋值
                     Object.assign(this, res.data)

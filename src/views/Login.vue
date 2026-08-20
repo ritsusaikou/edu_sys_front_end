@@ -56,22 +56,17 @@ const login = async () => {
     return;
   }
 
-  const res = await request.post("/user/loginByAccount", {
+  const res = await request.post("/user/login", {
     account: account.value,
     password: password.value,
   });
-  // console.log(res);
+  console.log(res);
   if (res.code === 200) {
     ElMessage.success("登录成功");
-    const res = await request.get("/user/getInfo");
-    if (res.code === 200) {
-      userInfoStore.login(res.data);
-    } else {
-      ElMessage.error(res.msg);
-    }
+    userInfoStore.login(res.data);
     router.push("/home");
   } else {
-    ElMessage.error("账户密码校验失败");
+    ElMessage.error("res.msg");
   }
 };
 

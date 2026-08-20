@@ -14,6 +14,8 @@ const ScoreQuery = () => import('../views/ScoreQuery.vue')
 const EvaluateCourseScore = () => import('../views/EvaluateCourseScore.vue')
 const TestForWs = () => import('../views/TestForWs.vue')
 
+
+
 const routes = [
     {
         // 默认指向'/home'
@@ -108,7 +110,7 @@ router.beforeEach(async (to, from, next) => {
     const token = getTokenFromCookie()
 
     //登录页直接放行
-    if(to.path === '/login'){
+    if (to.path === '/login') {
         next()
         return
     }
